@@ -8,10 +8,17 @@
 <body>
 <h1>User List</h1>
 <div class="btn-container">
-    <a href="/users/new" class="btn btn-new">유저 등록</a>
+    <div>
+        <a href="/users/new" class="btn btn-new">유저 등록</a>
+        <button onclick="defalutList()" class="btn btn-new">초기화</button>
+    </div>
     <div class="search-section">
         <input type="text" id="searchInput" placeholder="유저명 혹은 이메일로 검색해보세요">
         <button onclick="searchUsers()" class="btn">검색</button>
+    </div>
+    <div class="search-section">
+        <input type="text" id="searchUsernameInput" placeholder="유저명으로 검색해보세요">
+        <button onclick="searchUsersByUsername()" class="btn">검색</button>
     </div>
 
     <div class="username-check-section">
@@ -54,6 +61,18 @@
     function searchUsers() {
         const keyword = document.getElementById('searchInput').value;
         axios.get(`/api/users/search?keyword=${keyword}`)
+            .then(function (response) {
+                const users = response.data;
+                updateUserTable(users);
+            })
+            .catch(function (error) {
+                console.error('Error:', error);
+            });
+    }
+
+    function searchUsersByUsername(){
+        const keyword = document.getElementById('searchUsernameInput').value;
+        axios.get(`/api/users/byUsername?username=${keyword}`)
             .then(function (response) {
                 const users = response.data;
                 updateUserTable(users);
@@ -111,6 +130,10 @@
                     console.error('Error:', error);
                 });
         }
+    }
+
+    function defalutList(){
+        fetchUsers();
     }
 </script>
 </body>

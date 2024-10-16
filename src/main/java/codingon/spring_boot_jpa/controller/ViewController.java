@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ViewController {
 
     // GET / 요청시 /users 경로로 리다이렉트
-//    @GetMapping("/")
-//    public String redirectToUsers() {
-//        return "redirect:/users";
-//    }
+    @GetMapping("/")
+    public String redirectToUsers() {
+        return "redirect:/users";
+    }
 
     // GET /users 요청시 userList.html 템플릿 뷰 반환
     @GetMapping("/users")
@@ -31,10 +31,10 @@ public class ViewController {
         return "userForm";
     }
 
-    @GetMapping("/")
-    public String redirectToBoards() {
-        return "redirect:/boards";
-    }
+//    @GetMapping("/")
+//    public String redirectToBoards() {
+//        return "redirect:/boards";
+//    }
 
     @GetMapping("/boards")
     public String listBoards() {
